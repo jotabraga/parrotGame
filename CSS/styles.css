@@ -28,13 +28,14 @@ body{
 }
 .card-box{
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-    justify-content: space-evenly;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 380px;    
 }
-.front-card{
+.back-card, .front-card{
     background: #a7e9af;
     border: 1px #99cea8 solid;
     display: flex;
@@ -45,8 +46,17 @@ body{
     margin-bottom: 34px;
     margin-right: 34px;
 }
-.front-card img{
+.back-card img{
     width: 100px;
     height: 100px;
     margin-top: 24px;
+}
+.front-card{
+    display: none;
+}
+.front-card img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    margin: 0 auto;
 }
