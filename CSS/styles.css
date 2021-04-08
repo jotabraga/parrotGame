@@ -44,8 +44,8 @@ body{
     width: 117px;
     height: 146px;
     margin-bottom: 34px;
-    margin-right: 34px;
-    display: none;
+    margin-right: 34px; 
+    transform-style: preserve-3d;
 }
 .back-card img{
     width: 100px;
@@ -53,7 +53,8 @@ body{
     margin-top: 24px;
 }
 .front-card{
-    display: block;
+    display: none;
+    transform: rotateY(180deg);
 }
 .front-card img{
     width: 100%;
@@ -61,6 +62,15 @@ body{
     border-radius: 5px;
     margin: 0 auto;
 }
+.card:active .back-card {
+    transform: rotateY(0deg);
+  }
+.card:active .front-card {
+    transform: rotateY(0deg);
+  }
 .hidden{
-    display: none;
+    display: none; 
+}
+.visible{
+    display: block;
 }

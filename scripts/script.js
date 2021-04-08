@@ -14,32 +14,34 @@ function gameInit(){
 
 function gameStart(cardsNumber){                                        //inicio de jogo com a criação das cartas
 
+    for(let k=0; k < cardsNumber; k++){
+        gamecard[k] = document.querySelector(`.card${k}`);
+    }
+
+    gamecard.sort(comparator);
     const game = document.querySelector('.card-box');
     game.innerHTML = '';
 
     for(let i=0, j=0; i < cardsNumber; i++){              
         if(i%2 === 0 && i !== 0){
             j++;                
-        }   
-        console.log(gamecard[i]);               
-        game.innerHTML += `<div class="card${i}"><div class="front-card"><img src="Midia/${cardPictures[j]}.png"></div><div class="back-card" onclick="turnCard(this)"><img src="Midia/${cardPictures[7]}.png"></div></div>`
-    }
-    for(let k=0; k < cardsNumber; k++){
-        gamecard[k] = document.querySelector(`.card${k}`);
-    }
-    gamecard.sort(comparator);
-    }
-
-    
-
+        }                
+        game.innerHTML += `<div class="card"><div class="front-card hidden"><img src="Midia/${cardPictures[j]}.png"></div><div class="back-card visible" onclick="turnCard(this)"><img src="Midia/${cardPictures[7]}.png"></div></div>`
+    }    
+    }   
 function comparator(){
     return Math.random() - 0.5;
 }
-
-function turnCard(element){    
+function turnCard(element){  
+    let pair;    
+    element.classList.replace('visible','hidden');
     const parent = element.parentNode;
-    const brother = parent.firstChild;
-    console.log(parent);
+    const cartId = parent.firstChild;
+    cartId.classList.replace('hidden','visible');
+    pair++;
+    if (pair%2 === 0){
+        cardAnalise();
+    }
 }
   //  this.classList.add('hidden');
    // rounds++;                                               //função para virar a carta e ver se a proxima é igual ou diferente
