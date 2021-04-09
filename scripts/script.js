@@ -2,7 +2,8 @@ let cardsNumber;        //declarando o numero de cartas
 let rounds=0;       //variavel para guardar o numero de jogadas
 let gamecard = [];
 let card = [];      //array da div das cartas
-const cardPictures = ["charlie","linus","lucy","paty","sally","snoopy","woodstock","back"];
+const cardPictures = ["charlie","linus","lucy","paty","sally","snoopy","woodstock"];
+const picturesSorted = [];
 let cardSelected = [];
 
 function gameInit(){
@@ -15,18 +16,25 @@ function gameInit(){
 }
 
 function gameStart(cardsNumber){                                        //inicio de jogo com a criação das cartas
+   
+    for (let i=0; i < cardsNumber/2; i++){
+        cardSelected[i] = cardPictures[i];
+    }
+    //for (let i=0; i < cardSelected.length; i++){
+    //    cardSelected.push(cardPictures[i]);
+    //}    
 
-    gamecard.sort(comparator);
+    cardSelected.sort(comparator);
+    
     const game = document.querySelector('.card-box');
     game.innerHTML = '';
 
-    for(let i=0, j=0; i < cardsNumber; i++){              
-        if(i%2 === 0 && i !== 0){
-            j++;                
-        }                
-        game.innerHTML += `<div class="card"><div class="front-card hidden"><img src="Midia/${cardPictures[j]}.png"></div><div class="back-card visible" onclick="turnCard(this)"><img src="Midia/${cardPictures[7]}.png"></div></div>`
-    }    
-    }   
+    for(let i=0; i < cardsNumber; i++){                  
+        game.innerHTML += `<div class="card"><div class="front-card hidden"><img src="Midia/${cardSelected[i]}.png"></div><div class="back-card visible" onclick="turnCard(this)"><img src="Midia/back.png"></div></div>`
+    }
+    
+    } 
+
 function comparator(){
     return Math.random() - 0.5;
 }
@@ -41,9 +49,9 @@ function turnCard(element){
     console.log(cardSelected);
     rounds++;
     
-    if(cardSelected.length === 2){               
-        cardAnalise(cardSelected[0],cardSelected[1]);
-        cardSelected = [];        
+    if(cardSelected.length === 2){                  
+        cardAnalise(cardSelected[0], cardSelected[1]);
+        cardSelected = [];           
     }
     }
 
@@ -55,14 +63,6 @@ function cardAnalise(card1, card2){
     console.log(firstImg);
     secondImg = card2.firstChild;
 }
-
-
-function cardAnalise(cardShow){
-
-
-}
-  
-
 
 
 gameInit();
