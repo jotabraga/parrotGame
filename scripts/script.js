@@ -1,6 +1,7 @@
 let cardsNumber;        //declarando o numero de cartas
 let rounds=0;       //variavel para guardar o numero de jogadas
-let gamecard = [];      //array da div das cartas
+let gamecard = [];
+let card = [];      //array da div das cartas
 const cardPictures = ["charlie","linus","lucy","paty","sally","snoopy","woodstock","back"];
 
 function gameInit(){
@@ -14,9 +15,7 @@ function gameInit(){
 
 function gameStart(cardsNumber){                                        //inicio de jogo com a criação das cartas
 
-    for(let k=0; k < cardsNumber; k++){
-        gamecard[k] = document.querySelector(`.card${k}`);
-    }
+    
 
     gamecard.sort(comparator);
     const game = document.querySelector('.card-box');
@@ -32,19 +31,38 @@ function gameStart(cardsNumber){                                        //inicio
 function comparator(){
     return Math.random() - 0.5;
 }
+
 function turnCard(element){  
-    let pair;    
+    let cardSelected = [];
+ 
     element.classList.replace('visible','hidden');
     const parent = element.parentNode;
-    const cartId = parent.firstChild;
-    cartId.classList.replace('hidden','visible');
-    pair++;
-    if (pair%2 === 0){
-        cardAnalise();
+    const cardId = parent.firstChild;
+    cardId.classList.replace('hidden','visible');
+    cardSelected.push(parent);
+    
+    if(cardSelected.length){
+        alert("teste");
+        
+        cardAnalise(cardSelected[0],cardSelected[1]);
+        cardSelected.length = 0;
     }
+    }
+
+function cardAnalise(card1, card2){
+    pictureCard1 = card1.innerHTML;
+    console.log(pictureCard1);
+    pictureCard2 = card2.innerHTML;
+    console.log(firstImg);
+    secondImg = card2.firstChild;
 }
-  //  this.classList.add('hidden');
-   // rounds++;                                               //função para virar a carta e ver se a proxima é igual ou diferente
+
+
+function cardAnalise(cardShow){
+
+
+}
+  
 
 
 

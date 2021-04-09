@@ -54,7 +54,6 @@ body{
 }
 .front-card{
     display: none;
-    transform: rotateY(180deg);
 }
 .front-card img{
     width: 100%;
@@ -62,15 +61,12 @@ body{
     border-radius: 5px;
     margin: 0 auto;
 }
-.card:active .back-card {
-    transform: rotateY(0deg);
-  }
-.card:active .front-card {
-    transform: rotateY(0deg);
-  }
+
 .hidden{
     display: none; 
+    transform: rotateY(-180deg);
 }
 .visible{
     display: block;
+    transform: rotateY(180deg);
 }
