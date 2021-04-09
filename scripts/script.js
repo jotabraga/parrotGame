@@ -6,17 +6,19 @@ const cardPictures = ["charlie","linus","lucy","paty","sally","snoopy","woodstoc
 const picturesSorted = [];
 let cardSelected = [];
 let hits = 0;
+let interval;
 
 function gameInit(){
     let cardsNumber = parseInt(prompt("Com quantas cartas deseja jogar?"));
     if (cardsNumber%2 !== 0 || cardsNumber < 4 || cardsNumber > 14){        //se num de cartas for impar ou > que 14 ou < que 4 
         gameInit();                                                         //a função se chama repetindo a pergunta, dá pra usar while também 
     }else{
-        gameStart(cardsNumber);                                             //se tudo ok começa o jogo
+        gameStart(cardsNumber);  
+        countTime();                                           //se tudo ok começa o jogo
     }    
 }
 
-function gameStart(cardsNumber){
+function gameStart(cardsNumber){   
     
     for (let i=0; i < cardsNumber/2; i++){      //cria uma array de imagens
         picturesSorted[i] = cardPictures[i];      //com as imagens disponiveis
@@ -31,7 +33,18 @@ function gameStart(cardsNumber){
     for(let i=0; i < cardsNumber; i++){                  
         game.innerHTML += `<div class="card"><div class="front-card hidden"><img src="Midia/${picturesSorted[i]}.png"></div><div class="back-card visible" onclick="turnCard(this)"><img src="Midia/back.png"></div></div>`
     }    
-    } 
+    }
+
+function countTime(){
+   let timer = 0;
+   interval=setInterval(incrementCount, 1000);
+   function incrementCount(){
+   timer++;
+   const timeIn = document.querySelector('.clock');
+   timeIn.innerHTML = '';
+   timeIn.innerHTML += timer;
+}
+} 
 
 function comparator(){
     return Math.random() - 0.5;
@@ -40,11 +53,12 @@ function comparator(){
 function turnCard(element){ 
     element.classList.replace('visible','hidden');
     const parent = element.parentNode;
+    parent.classList.add('flip');
     const cardId = parent.firstChild;
     cardId.classList.replace('hidden','visible');
     cardSelected.push(parent);
     rounds++;
-    
+   
     if(cardSelected.length === 2){                  
         cardAnalise(cardSelected[0], cardSelected[1]);
         cardSelected = [];                 
@@ -62,6 +76,8 @@ function cardAnalise(card1, card2){
     }else{  
         setTimeout(setWrongcard, 1000);
         function setWrongcard(){
+        card1.classList.remove('flip');
+        card2.classList.remove('flip');
         card1.firstChild.classList.replace('visible','hidden');
         card2.firstChild.classList.replace('visible','hidden');
         card1.lastChild.classList.replace('hidden','visible');
@@ -73,16 +89,15 @@ function verifyGame(){
     setTimeout(finalGame, 1000);
         function finalGame(){   
 
-    if(hits === picturesSorted.length){
-        const gameChoice = prompt("Você ganhou em " + rounds/2 + " rodadas quer jogar de novo? S ou N?");
-        if(gameChoice === "S"){
-            gameInit();
-        }else{
-            alert("Final de jogo!");
-        }
-
+        if(hits === picturesSorted.length){
+            const gameChoice = prompt("Você ganhou em " + rounds/2 + " rodadas quer jogar de novo? S ou N?");
+            if(gameChoice === "S"){
+                gameInit();
+            }else{
+                clearInterval(interval);            
+            }
     }
-        }
+    }
 }
 
 gameInit();
