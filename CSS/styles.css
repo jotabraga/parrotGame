@@ -15,14 +15,6 @@ body{
     margin-top: 40px;
     color: #75b79e;
 }
-@media (max-width:600px){
-    .title{
-        font-size: 36px;
-    }
-    .card-box{
-        flex-direction: column;
-    }
-}
 .card-box{
     display: flex;
     flex-direction: column;
@@ -31,7 +23,21 @@ body{
     justify-content: center;
     width: auto;
     height: 380px;
-    perspective: 1000px;
+    margin-top: 34px;    
+}
+@media (max-width:600px){
+    .title{
+        font-size: 36px;
+    }
+    .card-box{
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+        
+        width: auto;
+        height: auto;
+    }
 }
 .back-card, .front-card{
     background: #a7e9af;

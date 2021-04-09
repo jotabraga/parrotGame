@@ -1,6 +1,6 @@
 let cardsNumber;        //declarando o numero de cartas
 let rounds=0;             //variavel para guardar o numero de jogadas
-let card = [];            //array da div das cartas
+
 const cardPictures = ["charlie","linus","lucy","paty","sally","snoopy","woodstock"];
 let picturesSorted = [];
 let cardSelected = [];
@@ -34,43 +34,42 @@ function gameStart(cardsNumber){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function countTime(){
    let timer = 0;
-   interval=setInterval(incrementCount, 1000);
-   function incrementCount(){
+   interval=setInterval(incrementCount, 1000);         //função relogio 
+   function incrementCount(){                          //registra o tempo em segundos
    timer++;
    const timeIn = document.querySelector('.clock');
    timeIn.innerHTML = '';
    timeIn.innerHTML += timer;}
 } 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function comparator(){
-    return Math.random() - 0.5;
-}
+function comparator(){                                 //função  para aleatorizar os indices de uma array    
+    return Math.random() - 0.5;}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function turnCard(element){ 
-    element.classList.replace('visible','hidden');
+    element.classList.replace('visible','hidden');    //pega o elemento clicado, no caso a carta virada e deixa o lado de tras invisivel
     const parent = element.parentNode;
-    parent.classList.add('flip');
-    const cardId = parent.firstChild;
-    cardId.classList.replace('hidden','visible');
-    cardSelected.push(parent);
+    parent.classList.add('flip');                     //essa classe foi criada exclusivamente para fazer a animação de virada 3D
+    const cardId = parent.firstChild;                 //pega o pai da div da carta que foi clicada e seleciona a primeira div do pai, no caso 
+    cardId.classList.replace('hidden','visible');     //o lado da frente da carta clicada, e deixa esse lado visivel
+    cardSelected.push(parent);                        //coloca a div pai numa array de 2 posições para comparar 2 cartas viradas
     rounds++;
    
     if(cardSelected.length === 2){                  
-        cardAnalise(cardSelected[0], cardSelected[1]);
+        cardAnalise(cardSelected[0], cardSelected[1]); //analisa as cartas viradas de 2 a 2
         cardSelected = [];                 
     }}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function cardAnalise(card1, card2){    
-    pictureCard1 = card1.firstChild.innerHTML;    
-    pictureCard2 = card2.firstChild.innerHTML;
+    pictureCard1 = card1.firstChild.innerHTML;      //pega o conteudo dentro da carta
+    pictureCard2 = card2.firstChild.innerHTML;      //ou seja, pega a identificação de cada imagem dentro da carta
 
     if(pictureCard1 === pictureCard2){
-        hits = hits + 2;
+        hits = hits + 2;                            //se for igual deixa virada e conta como 2 acertos
         console.log(hits);
-        verifyGame();
+        verifyGame();                               //toda vez que acerta verifica se todas foram viradas corretamente
     }else{  
         setTimeout(setWrongcard, 1000);
-        function setWrongcard(){
+        function setWrongcard(){                    //se forem cartas diferentes desvira as cartas e retorna as condições iniciais antes do click
         card1.classList.remove('flip');
         card2.classList.remove('flip');
         card1.firstChild.classList.replace('visible','hidden');
@@ -84,17 +83,17 @@ function cardAnalise(card1, card2){
 function verifyGame(){
     setTimeout(finalGame, 1000);
         function finalGame(){   
-        if(hits === picturesSorted.length){
+        if(hits === picturesSorted.length){           //quando o total de acertos for igual a quantidade de cartas no jogo o jogo acaba 
             const gameChoice = prompt("Você ganhou em " + rounds/2 + " rodadas quer jogar de novo? S ou N?");
             if(gameChoice === "S"){
-                picturesSorted.length = 0;
+                picturesSorted.length = 0;           //reseta para zero as variaveis para iniciar um novo jogo
                 hits = 0;
-                clearInterval(interval);
+                rounds = 0;
+                clearInterval(interval);             //retorna o relogio pra zero segundos
                 gameInit();                
             }else{
-                clearInterval(interval);            
-            }
-        }
+                clearInterval(interval);           //retorna o relogio pra zero segundos e trava a tela  
+            }}
         }   
 }
 gameInit();
