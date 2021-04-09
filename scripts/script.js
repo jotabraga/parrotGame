@@ -78,7 +78,7 @@ function verifyGame(){
         if(gameChoice === "S"){
             gameInit();
         }else{
-            alert("Tu joga e faz bootcamp? Tu é bixão memo hein!")
+            alert("Final de jogo!");
         }
 
     }
