@@ -16,7 +16,7 @@ function gameInit(){
         countTime();                                                        
     }    
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function gameStart(cardsNumber){      
     for (let i=0; i < cardsNumber/2; i++){             //cria uma array de imagens
         picturesSorted[i] = cardPictures[i];           //com as imagens disponiveis
@@ -31,7 +31,7 @@ function gameStart(cardsNumber){
     for(let i=0; i < cardsNumber; i++){                //add a div de cartas respeitando o numero de cartas solicitado pelo user            
         game.innerHTML += `<div class="card"><div class="front-card hidden"><img src="Midia/${picturesSorted[i]}.png"></div><div class="back-card visible" onclick="turnCard(this)"><img src="Midia/back.png"></div></div>`}    
     }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function countTime(){
    let timer = 0;
    interval=setInterval(incrementCount, 1000);         //função relogio 
@@ -41,10 +41,10 @@ function countTime(){
    timeIn.innerHTML = '';
    timeIn.innerHTML += timer;}
 } 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function comparator(){                                 //função  para aleatorizar os indices de uma array    
     return Math.random() - 0.5;}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function turnCard(element){ 
     element.classList.replace('visible','hidden');    //pega o elemento clicado, no caso a carta virada e deixa o lado de tras invisivel
     const parent = element.parentNode;
@@ -58,7 +58,7 @@ function turnCard(element){
         cardAnalise(cardSelected[0], cardSelected[1]); //analisa as cartas viradas de 2 a 2
         cardSelected = [];                 
     }}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function cardAnalise(card1, card2){    
     pictureCard1 = card1.firstChild.innerHTML;      //pega o conteudo dentro da carta
     pictureCard2 = card2.firstChild.innerHTML;      //ou seja, pega a identificação de cada imagem dentro da carta
@@ -79,7 +79,7 @@ function cardAnalise(card1, card2){
         }
     }
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function verifyGame(){
     setTimeout(finalGame, 1000);
         function finalGame(){   
