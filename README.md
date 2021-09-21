@@ -1,6 +1,6 @@
-# parrotgame-frontend :game_die: Memory card game (with snoopy characters) 
+# Memory game :game_die:  
 ## Preview 👀
-![E-Wallet_preview](./src/assets/e-wallet.gif) 
+![Parrot game](./src/assets/e-wallet.gif) 
 #### [Click here and try it now!](https://vercel.com/jotabraga/parrotgame-frontend)
 ## About 🔎
 This is a very simple memory card game.
