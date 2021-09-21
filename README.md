@@ -1,6 +1,6 @@
 # Memory game :game_die:  
 ## Preview 👀
-![Parrot game](./src/assets/e-wallet.gif) 
+![Parrot game](./Midia/game.gif) 
 #### [Click here and try it now!](https://vercel.com/jotabraga/parrotgame-frontend)
 ## About 🔎
 This is a very simple memory card game.
